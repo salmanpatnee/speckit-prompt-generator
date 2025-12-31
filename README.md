@@ -1,5 +1,10 @@
 # Speckit Prompt Generator – Skill Documentation
 
+[![GitHub stars](https://img.shields.io/github/stars/salmanpatnee/speckit-prompt-generator?style=social)](https://github.com/salmanpatnee/speckit-prompt-generator)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![Python 3.7+](https://img.shields.io/badge/python-3.7+-blue.svg)](https://www.python.org/downloads/)
+[![GitHub Issues](https://img.shields.io/github/issues/salmanpatnee/speckit-prompt-generator)](https://github.com/salmanpatnee/speckit-prompt-generator/issues)
+
 **A reusable Claude skill that transforms structured plan documents into high-quality, paragraph-style Speckit-compatible prompts.**
 
 ## Quick Overview
