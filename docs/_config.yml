@@ -1,0 +1,11 @@
+theme: jekyll-theme-minimal
+title: Speckit Prompt Generator
+description: Transform plans into prompts automatically
+show_downloads: true
+github:
+  is_project_page: true
+  repository_url: https://github.com/salmanpatnee/speckit-prompt-generator
+
+plugins:
+  - jekyll-gist
+  - jekyll-github-metadata
