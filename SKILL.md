@@ -1,6 +1,6 @@
 ---
 name: speckit-prompt-generator
-description: Generate high-quality, paragraph-style specification and planning prompts compatible with Speckit (Spec-Driven Development) from structured plan documents. Generates TWO prompts per phase (spec + plan) for complete coverage. Translates multi-phase plans into executable prompts for /sp.specify and /sp.plan commands. Use when you have a plan document (spec.md, plan.md, or phase outline) with clear steps/phases and need to generate corresponding Speckit-compatible prompts that can be directly executed. Outputs all prompts in a single consolidated Markdown file with clear labeling, ready for immediate use. Total output: N phases = 2N prompts.
+description: "Generate high-quality, paragraph-style specification and planning prompts compatible with Speckit (Spec-Driven Development) from structured plan documents. Generates TWO prompts per phase (spec + plan) for complete coverage. Translates multi-phase plans into executable prompts for /sp.specify and /sp.plan commands. Use when you have a plan document (spec.md, plan.md, or phase outline) with clear steps/phases and need to generate corresponding Speckit-compatible prompts that can be directly executed. Outputs all prompts in a single consolidated Markdown file with clear labeling, ready for immediate use. Total output: N phases = 2N prompts."
 ---
 
 # Speckit Prompt Generator
