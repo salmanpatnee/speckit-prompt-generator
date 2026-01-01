@@ -1,7 +1,15 @@
 ---
-layout: default
+layout: blank
 title: Speckit Prompt Generator
 ---
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{{ page.title }}</title>
+</head>
+<body>
 
 <style>
 :root {
@@ -614,3 +622,6 @@ Phase 1: (colon instead of – dash)</code></pre>
 </footer>
 
 </div>
+
+</body>
+</html>
