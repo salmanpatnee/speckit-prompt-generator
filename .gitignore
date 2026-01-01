@@ -32,6 +32,12 @@ ENV/
 *.swo
 *~
 
+# Claude Code
+CLAUDE.md
+
+# MCP Configuration (contains secrets)
+.mcp.json
+
 # OS
 .DS_Store
 Thumbs.db

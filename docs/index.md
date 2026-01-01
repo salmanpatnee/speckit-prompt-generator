@@ -1,81 +1,377 @@
-# Speckit Prompt Generator – Skill Documentation
+---
+layout: default
+title: Speckit Prompt Generator
+---
 
-[![GitHub Repo](https://img.shields.io/static/v1?label=Repository&message=GitHub&color=181717&logo=github)](https://github.com/salmanpatnee/speckit-prompt-generator)
-[![Documentation](https://img.shields.io/static/v1?label=Docs&message=Read&color=0070f0)](https://salmanpatnee.github.io/speckit-prompt-generator/)
-[![GitHub stars](https://img.shields.io/github/stars/salmanpatnee/speckit-prompt-generator?style=social)](https://github.com/salmanpatnee/speckit-prompt-generator)
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![Python 3.7+](https://img.shields.io/badge/python-3.7+-blue.svg)](https://www.python.org/downloads/)
+<style>
+:root {
+  --bg: #ffffff;
+  --surface: #f8f9fa;
+  --border: #e1e4e8;
+  --text: #24292e;
+  --text-secondary: #586069;
+  --accent: #d97706;
+  --accent-light: #fef3c7;
+  --code-bg: #f6f8fa;
+}
 
-**A reusable Claude skill that transforms structured plan documents into high-quality, paragraph-style Speckit-compatible prompts.**
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
 
-## Quick Overview
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica', 'Arial', sans-serif;
+  line-height: 1.6;
+  color: var(--text);
+  background: var(--bg);
+}
 
-The `speckit-prompt-generator` skill analyzes multi-phase plan documents and generates executable prompts for `/sp.specify` and `/sp.plan` commands. It's designed to support Spec-Driven Development (SDD) workflows by automating the translation from planning phase → implementation phase.
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
 
-**In one sentence:** Turn your phase plan into ready-to-use Speckit prompts (2 prompts per phase: spec + plan).
+/* Header */
+header {
+  border-bottom: 1px solid var(--border);
+  padding: 2rem 0;
+  margin-bottom: 3rem;
+}
 
-## What Problem Does This Solve?
+.logo {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--text);
+}
 
-When using Spec-Driven Development, you often have:
-- A detailed plan with multiple phases (e.g., Requirements → Architecture → API Design → Frontend)
-- The need to run separate `/sp.specify` and `/sp.plan` commands for **each phase**
-- Each phase requires **TWO prompts**: one for spec (WHAT) and one for plan (HOW)
-- Desire for consistency and quality across all generated prompts
+.badges {
+  margin-top: 1rem;
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
 
-**The Challenge:** Writing individual spec AND plan prompts for each phase is time-consuming and error-prone. For 8 phases, that's 16 prompts to write manually!
+/* Hero */
+.hero {
+  margin-bottom: 4rem;
+}
 
-**The Solution:** Provide your plan document → Get back **all prompts at once** (2 per phase) → Run them through Speckit sequentially.
+h1 {
+  font-size: 3rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+  line-height: 1.2;
+}
 
-## Key Features
+.subtitle {
+  font-size: 1.25rem;
+  color: var(--text-secondary);
+  margin-bottom: 2rem;
+}
 
-| Feature | Benefit |
-|---------|---------|
-| **Fully Automated** | No user interaction needed; just provide your plan |
-| **High Quality** | Prompts follow proven patterns and quality standards |
-| **Paragraph Form** | Optimized for Speckit AI processing (not bullet lists) |
-| **Consolidated Output** | Single Markdown file with all prompts, ready to use |
-| **Intent-Focused** | Emphasizes outcomes and constraints, not implementation details |
-| **Reusable** | Works with any multi-phase project |
+.highlight-box {
+  background: var(--accent-light);
+  border-left: 4px solid var(--accent);
+  padding: 1.5rem;
+  margin: 2rem 0;
+  border-radius: 4px;
+}
 
-## Skill Components
+.stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1.5rem;
+  margin: 2rem 0;
+}
 
-```
-speckit-prompt-generator/
-├── SKILL.md                           ← Start here (user-facing guide)
-├── scripts/generate_prompts.py        ← Executable Python script
-├── references/
-│   ├── prompt-quality-standards.md    ← Design patterns & guidelines
-│   └── workflows.md                   ← Real-world examples
-├── assets/
-│   └── example-output.md              ← Sample generated output
-├── IMPLEMENTATION_SUMMARY.md          ← Technical overview
-├── PACKAGING_GUIDE.md                 ← Distribution instructions
-└── README.md                          ← This file
-```
+.stat {
+  text-align: center;
+  padding: 1.5rem;
+  background: var(--surface);
+  border-radius: 8px;
+}
 
-## Installation
+.stat-value {
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--accent);
+}
 
-1. **Locate your skills directory:**
-   - macOS/Linux: `~/.claude/skills/`
-   - Windows: `C:\Users\<YourUsername>\.claude\skills\`
+.stat-label {
+  color: var(--text-secondary);
+  margin-top: 0.5rem;
+}
 
-2. **Place the skill file:**
-   ```bash
-   cp speckit-prompt-generator.skill ~/.claude/skills/
-   ```
+/* Sections */
+section {
+  margin: 4rem 0;
+}
 
-3. **Restart Claude Code** or reload skills
+h2 {
+  font-size: 2rem;
+  margin-bottom: 1.5rem;
+  font-weight: 700;
+  border-bottom: 2px solid var(--border);
+  padding-bottom: 0.5rem;
+}
 
-4. **Done!** Skill is ready to use
+h3 {
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+  font-weight: 600;
+}
 
-## Usage – Quick Start
+/* Grid */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.5rem;
+  margin: 2rem 0;
+}
 
-### Step 1: Create a Plan Document
+.card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 1.5rem;
+  transition: box-shadow 0.2s;
+}
 
-```markdown
-# My Feature Plan
+.card:hover {
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
 
-## Phase 1 – Requirements Gathering
+.card h3 {
+  margin-top: 0;
+  color: var(--accent);
+}
+
+/* Code */
+pre {
+  background: var(--code-bg);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 1rem;
+  overflow-x: auto;
+  margin: 1rem 0;
+}
+
+code {
+  font-family: 'SF Mono', Monaco, 'Courier New', monospace;
+  font-size: 0.9em;
+  background: var(--code-bg);
+  padding: 0.2em 0.4em;
+  border-radius: 3px;
+}
+
+pre code {
+  background: none;
+  padding: 0;
+}
+
+/* Lists */
+ul, ol {
+  margin-left: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+li {
+  margin-bottom: 0.5rem;
+}
+
+/* Steps */
+.steps {
+  counter-reset: step;
+}
+
+.step {
+  background: var(--surface);
+  border-left: 4px solid var(--accent);
+  padding: 1rem 1rem 1rem 3.5rem;
+  margin-bottom: 1rem;
+  border-radius: 4px;
+  position: relative;
+}
+
+.step::before {
+  counter-increment: step;
+  content: counter(step);
+  position: absolute;
+  left: 1rem;
+  width: 1.8rem;
+  height: 1.8rem;
+  background: var(--accent);
+  color: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 0.9rem;
+}
+
+/* Table */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 2rem 0;
+}
+
+th, td {
+  text-align: left;
+  padding: 0.75rem;
+  border-bottom: 1px solid var(--border);
+}
+
+th {
+  font-weight: 600;
+  background: var(--surface);
+}
+
+/* Links */
+a {
+  color: var(--accent);
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+/* Footer */
+footer {
+  margin-top: 4rem;
+  padding: 2rem 0;
+  border-top: 1px solid var(--border);
+  text-align: center;
+  color: var(--text-secondary);
+}
+
+.footer-links {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  margin-bottom: 1rem;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .container {
+    padding: 0 1rem;
+  }
+
+  h1 {
+    font-size: 2rem;
+  }
+
+  .grid {
+    grid-template-columns: 1fr;
+  }
+}
+</style>
+
+<div class="container">
+
+<header>
+  <div class="logo">⚡ Speckit Prompt Generator</div>
+  <div class="badges">
+    <a href="https://github.com/salmanpatnee/speckit-prompt-generator"><img src="https://img.shields.io/github/stars/salmanpatnee/speckit-prompt-generator?style=social" alt="GitHub stars"></a>
+    <img src="https://img.shields.io/badge/License-MIT-yellow.svg" alt="License">
+    <img src="https://img.shields.io/badge/python-3.7+-blue.svg" alt="Python 3.7+">
+  </div>
+</header>
+
+<section class="hero">
+  <h1>Transform Plans into Perfect Prompts</h1>
+  <p class="subtitle">A Claude Code skill that automatically generates high-quality, paragraph-style Speckit prompts from your multi-phase development plans.</p>
+
+  <div class="highlight-box">
+    <strong>Turn 1 plan → Get 2N prompts</strong> (spec + plan for each phase)
+  </div>
+
+  <div class="stats">
+    <div class="stat">
+      <div class="stat-value">2×</div>
+      <div class="stat-label">Prompts per phase</div>
+    </div>
+    <div class="stat">
+      <div class="stat-value">&lt;1s</div>
+      <div class="stat-label">Generation time</div>
+    </div>
+    <div class="stat">
+      <div class="stat-value">100%</div>
+      <div class="stat-label">Automated</div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <h2>What Problem Does This Solve?</h2>
+  <p>When using Spec-Driven Development, writing individual <strong>spec AND plan prompts</strong> for each phase is time-consuming and error-prone. For 8 phases, that's <strong>16 prompts to write manually!</strong></p>
+  <p><strong>The Solution:</strong> Provide your plan document → Get back all prompts at once (2 per phase) → Run them through Speckit sequentially.</p>
+</section>
+
+<section>
+  <h2>Key Features</h2>
+  <div class="grid">
+    <div class="card">
+      <h3>🤖 Fully Automated</h3>
+      <p>No user interaction needed; just provide your plan and get production-ready prompts instantly.</p>
+    </div>
+    <div class="card">
+      <h3>💎 High Quality</h3>
+      <p>Prompts follow proven patterns and quality standards, ensuring consistency across all phases.</p>
+    </div>
+    <div class="card">
+      <h3>📝 Paragraph Form</h3>
+      <p>Optimized for Speckit AI processing with flowing narrative instead of bullet lists.</p>
+    </div>
+    <div class="card">
+      <h3>📦 Consolidated Output</h3>
+      <p>Single Markdown file with all prompts, clearly labeled and ready to use.</p>
+    </div>
+    <div class="card">
+      <h3>🎯 Intent-Focused</h3>
+      <p>Emphasizes outcomes and constraints, not implementation details.</p>
+    </div>
+    <div class="card">
+      <h3>🔄 Reusable</h3>
+      <p>Works with any multi-phase project across different frameworks.</p>
+    </div>
+  </div>
+</section>
+
+<section id="installation">
+  <h2>Installation</h2>
+  <div class="steps">
+    <div class="step">
+      <strong>Locate your skills directory</strong>
+      <ul>
+        <li>macOS/Linux: <code>~/.claude/skills/</code></li>
+        <li>Windows: <code>C:\Users\&lt;YourUsername&gt;\.claude\skills\</code></li>
+      </ul>
+    </div>
+    <div class="step">
+      <strong>Place the skill file</strong>
+      <pre><code>cp speckit-prompt-generator.skill ~/.claude/skills/</code></pre>
+    </div>
+    <div class="step">
+      <strong>Restart Claude Code or reload skills</strong>
+    </div>
+    <div class="step">
+      <strong>Done! Skill is ready to use</strong>
+    </div>
+  </div>
+</section>
+
+<section id="getting-started">
+  <h2>Quick Start</h2>
+
+  <h3>Step 1: Create a Plan Document</h3>
+  <pre><code>## Phase 1 – Requirements Gathering
 
 **Objective**
 Understand all user needs and constraints.
@@ -89,105 +385,136 @@ Understand all user needs and constraints.
 **Outcome**
 - Requirements document approved
 - Stakeholder sign-off obtained
-- Success metrics defined
+- Success metrics defined</code></pre>
 
-## Phase 2 – System Architecture
+  <h3>Step 2: Generate Prompts</h3>
+  <pre><code>Generate Speckit prompts from: /path/to/my-feature-plan.md</code></pre>
 
-**Objective**
-Design the technical foundation.
+  <h3>Step 3: Review Output</h3>
+  <p>The skill creates <code>speckit-prompts.md</code> in the same directory with all prompts ready to use.</p>
 
-**High-Level Scope**
-- System topology and components
-- Database schema
-- API contracts
-- Security model
-
-**Outcome**
-- Architecture diagram with clear boundaries
-- API specifications documented
-- Security review completed
-```
-
-### Step 2: Generate Prompts
-
-In Claude Code, use the skill:
-
-```
-Generate Speckit prompts from: /path/to/my-feature-plan.md
-```
-
-### Step 3: Review Output
-
-The skill creates `speckit-prompts.md` in the same directory with all prompts ready to use.
-
-### Step 4: Use with Speckit
-
-```bash
-# For EACH PHASE, run BOTH prompts in order:
-
-# Phase 1:
+  <h3>Step 4: Use with Speckit</h3>
+  <pre><code># For each phase, run both prompts:
 /sp.specify
 # Paste Phase 1 SPEC prompt
 
 /sp.plan
-# Paste Phase 1 PLAN prompt
+# Paste Phase 1 PLAN prompt</code></pre>
+</section>
 
-# Phase 2:
-/sp.specify
-# Paste Phase 2 SPEC prompt
+<section id="examples">
+  <h2>Example Output</h2>
 
-/sp.plan
-# Paste Phase 2 PLAN prompt
+  <h3>Spec Prompt (WHAT to build)</h3>
+  <div class="card">
+    <p><em>"Specify the system architecture requirements for Phase 2: System Architecture. The architecture must support high availability with 99.9% uptime, handle 10,000 concurrent users, maintain data consistency across distributed services..."</em></p>
+  </div>
 
-# Continue for all phases...
-# Total commands = phases × 2
-```
+  <h3>Plan Prompt (HOW to build it)</h3>
+  <div class="card">
+    <p><em>"Plan the implementation of the system architecture for Phase 2: System Architecture. Design the overall system topology separating concerns with clear service boundaries and communication protocols..."</em></p>
+  </div>
 
-## Example Output
+  <p><strong>Key Differences:</strong></p>
+  <ul>
+    <li><strong>Spec Prompt:</strong> Focuses on requirements, constraints, success criteria</li>
+    <li><strong>Plan Prompt:</strong> Focuses on implementation steps, technical approach</li>
+    <li>Both are paragraph form (not bullets)</li>
+    <li>Both ready to use with respective Speckit commands</li>
+  </ul>
+</section>
 
-Here's what the generated prompts look like for **one phase**:
+<section id="patterns">
+  <h2>Quality Standards</h2>
+  <table>
+    <thead>
+      <tr>
+        <th>Standard</th>
+        <th>Implementation</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>Paragraph form</strong></td>
+        <td>Flowing prose, no bullet points</td>
+      </tr>
+      <tr>
+        <td><strong>Intent-first</strong></td>
+        <td>Emphasizes "why" and "what outcomes"</td>
+      </tr>
+      <tr>
+        <td><strong>Concise</strong></td>
+        <td>60–150 words depending on complexity</td>
+      </tr>
+      <tr>
+        <td><strong>Logically chained</strong></td>
+        <td>Requirements build on each other</td>
+      </tr>
+      <tr>
+        <td><strong>Outcome-emphasized</strong></td>
+        <td>Repeats key success criteria</td>
+      </tr>
+      <tr>
+        <td><strong>No tech details</strong></td>
+        <td>Avoids specific framework names</td>
+      </tr>
+    </tbody>
+  </table>
+</section>
 
-### Spec Prompt (WHAT to build)
-```
-Specify the system architecture requirements for Phase 2: System Architecture.
-The architecture must support high availability with 99.9% uptime, handle 10,000
-concurrent users, maintain data consistency across distributed services, and
-integrate with existing authentication and payment systems. Define clear service
-boundaries, API contracts with versioning, security requirements including
-encryption at rest and in transit, and monitoring requirements for observability.
-Success criteria include approved architecture diagrams, documented API contracts,
-security review completion, and stakeholder sign-off on scalability targets.
-```
+<section id="workflows">
+  <h2>Common Use Cases</h2>
+  <div class="grid">
+    <div class="card">
+      <h3>Multi-Phase Feature</h3>
+      <p>5–7 phase plan for complex features like payment processing. Generate all prompts at once.</p>
+    </div>
+    <div class="card">
+      <h3>Multi-Service System</h3>
+      <p>Multiple microservices or components, each with phases.</p>
+    </div>
+    <div class="card">
+      <h3>Framework Setup</h3>
+      <p>Learning or setting up new frameworks (Laravel, React, etc.).</p>
+    </div>
+    <div class="card">
+      <h3>Iterative Refinement</h3>
+      <p>Refine your plan as you learn more and regenerate prompts.</p>
+    </div>
+  </div>
+</section>
 
-### Plan Prompt (HOW to build it)
-```
-Plan the implementation of the system architecture for Phase 2: System Architecture.
-Design the overall system topology separating concerns with clear service boundaries
-and communication protocols. Design the database schema to support transaction history,
-idempotency keys, and status tracking. Define API contracts for service interactions
-ensuring consistency and versioning. Select appropriate technologies for the tech stack
-based on scalability and team expertise. Address failure modes including retries,
-rollback, and state reconciliation to ensure reliability and data consistency throughout.
-Document the architecture with diagrams showing component interactions and data flows.
-```
+<section id="documentation">
+  <h2>Documentation</h2>
+  <div class="grid">
+    <div class="card">
+      <h3>📖 Usage Guide</h3>
+      <p>Learn how to write effective plan documents</p>
+      <a href="#usage-guide">Read →</a>
+    </div>
+    <div class="card">
+      <h3>📚 Quality Patterns</h3>
+      <p>Design patterns and quality checklists</p>
+      <a href="https://github.com/salmanpatnee/speckit-prompt-generator/blob/main/references/prompt-quality-standards.md">Read →</a>
+    </div>
+    <div class="card">
+      <h3>🛠️ Workflows</h3>
+      <p>5 detailed real-world workflow examples</p>
+      <a href="https://github.com/salmanpatnee/speckit-prompt-generator/blob/main/references/workflows.md">Read →</a>
+    </div>
+    <div class="card">
+      <h3>⚙️ API Reference</h3>
+      <p>Script documentation and technical details</p>
+      <a href="#api-reference">Read →</a>
+    </div>
+  </div>
+</section>
 
-Notice the difference:
-- **Spec Prompt**: Focuses on requirements, constraints, success criteria, what needs to be achieved
-- **Plan Prompt**: Focuses on implementation steps, technical approach, how to achieve it
-- Both are paragraph form (not bullets)
-- Both have clear objectives and logical flow
-- Both emphasize outcomes and quality standards
-- Both ready to use with their respective Speckit commands
+<section id="usage-guide">
+  <h2>Writing Good Plan Documents</h2>
 
-## How to Write Good Plan Documents
-
-For the skill to generate optimal prompts, your plan should include:
-
-### ✅ Required Structure
-
-Each phase needs:
-```markdown
-## Phase X – Phase Title
+  <h3>✅ Required Structure</h3>
+  <pre><code>## Phase X – Phase Title
 
 **Objective**
 Why this phase exists; what it accomplishes.
@@ -196,229 +523,94 @@ Why this phase exists; what it accomplishes.
 - Item 1
 - Item 2
 - Item 3
-- Item 4 (ideally 4+ items)
 
 **Outcome**
 - Expected result 1
-- Expected result 2
-- Expected result 3
-```
+- Expected result 2</code></pre>
 
-### ✅ Phase Numbering
-```markdown
-## Phase 1 – Requirements
+  <h3>✅ Phase Numbering</h3>
+  <pre><code>## Phase 1 – Requirements
 ## Phase 2 – Architecture
-## Phase 3 – Implementation
-```
+## Phase 3 – Implementation</code></pre>
 
-### ❌ What Doesn't Work
-
-```markdown
-# Requirements (missing phase number)
+  <h3>❌ What Doesn't Work</h3>
+  <pre><code># Requirements (missing phase number)
 PHASE 1 (all caps, no heading syntax)
-Phase 1: (colon instead of – dash)
-```
+Phase 1: (colon instead of – dash)</code></pre>
+</section>
 
-## Real-World Examples
+<section id="faq">
+  <h2>FAQ</h2>
 
-See `references/workflows.md` for 5 complete examples:
-1. Multi-phase feature development (5 phases)
-2. Laravel application build (5 phases)
-3. Existing plan refinement
-4. Quick iteration during planning
-5. Multi-document integration
+  <div class="card">
+    <h3>❓ "No phases found in plan document"</h3>
+    <p><strong>Check:</strong> Headings are <code>## Phase X – Title</code> format, not <code># Phase</code> or plain text.</p>
+  </div>
 
-## Quality Standards
+  <div class="card">
+    <h3>❓ "Prompts are too short"</h3>
+    <p><strong>Fix:</strong> Add more detail to your <strong>Objective</strong>, <strong>Scope</strong>, and <strong>Outcome</strong> sections.</p>
+  </div>
 
-All generated prompts follow proven quality standards:
+  <div class="card">
+    <h3>❓ "Can I run the script directly?"</h3>
+    <p>Yes! Use: <code>python scripts/generate_prompts.py /path/to/plan.md</code></p>
+  </div>
+</section>
 
-| Standard | Example |
-|----------|---------|
-| **Paragraph form** | "Design the architecture by planning the topology..." |
-| **Intent-first** | Emphasizes "why" and "what outcomes" not "how" |
-| **Concise** | 60–150 words depending on complexity |
-| **Logically chained** | Requirements build on each other |
-| **Outcome-emphasized** | Repeats key success criteria |
-| **No tech details** | Avoids specific framework/library names |
+<section id="api-reference">
+  <h2>API Reference</h2>
 
-See `references/prompt-quality-standards.md` for complete guidance.
+  <h3>Input Requirements</h3>
+  <ul>
+    <li><strong>Format:</strong> Markdown (<code>.md</code>)</li>
+    <li><strong>Structure:</strong> Clear <code>## Phase X – Title</code> headings</li>
+    <li><strong>Content:</strong> Objective, Scope, Outcome sections for each phase</li>
+    <li><strong>Size:</strong> Works with 1–20+ phases</li>
+  </ul>
 
-## Common Use Cases
+  <h3>Output Guarantee</h3>
+  <ul>
+    <li><strong>Format:</strong> Single consolidated Markdown file</li>
+    <li><strong>Location:</strong> Same directory as input plan</li>
+    <li><strong>Naming:</strong> <code>speckit-prompts.md</code> (or custom path)</li>
+  </ul>
 
-### 1. Multi-Phase Feature
-5–7 phase plan for a complex feature (e.g., payment processing, admin dashboard)
-→ Generate all prompts at once
-→ Run through Speckit sequentially
+  <h3>Direct Script Usage</h3>
+  <pre><code>python scripts/generate_prompts.py /path/to/plan.md [output_path]</code></pre>
+  <p><strong>Use cases:</strong> CI/CD integration, batch processing, custom output handling</p>
+</section>
 
-### 2. Multi-Service System
-Multiple microservices or components, each with phases
-→ Generate prompts for overall architecture
-→ Generate prompts for each service
+<section id="contributing">
+  <h2>Contributing</h2>
+  <div class="grid">
+    <div class="card">
+      <h3>Share Use Cases</h3>
+      <p>Share examples of successful prompt generation and real-world applications.</p>
+    </div>
+    <div class="card">
+      <h3>Suggest Features</h3>
+      <p>Propose new features or patterns that would enhance the skill.</p>
+    </div>
+    <div class="card">
+      <h3>Report Issues</h3>
+      <p>Describe the issue, expected behavior, and steps to reproduce.</p>
+    </div>
+    <div class="card">
+      <h3>Improve Docs</h3>
+      <p>Help enhance guides, examples, and quality standards.</p>
+    </div>
+  </div>
+</section>
 
-### 3. Framework/Stack Setup
-Learning or setting up a new framework (Laravel, React, etc.)
-→ Phase plan with setup steps
-→ Generate prompts for configuration and best practices
+<footer>
+  <div class="footer-links">
+    <a href="https://github.com/salmanpatnee/speckit-prompt-generator">GitHub</a>
+    <a href="https://github.com/salmanpatnee/speckit-prompt-generator/blob/main/SKILL.md">Documentation</a>
+    <a href="https://github.com/salmanpatnee/speckit-prompt-generator/issues">Issues</a>
+    <a href="https://github.com/salmanpatnee/speckit-prompt-generator/blob/main/LICENSE">License</a>
+  </div>
+  <p>Speckit Prompt Generator v1.0.0 · MIT License · Python 3.7+</p>
+</footer>
 
-### 4. Iterative Refinement
-Refine your plan as you learn more
-→ Regenerate prompts to capture updates
-→ New prompts reflect evolved understanding
-
-## Troubleshooting
-
-### "No phases found in plan document"
-
-**Check:**
-- Headings are `## Phase X – Title` format
-- Not `# Phase` (top-level heading)
-- Not `PHASE 1` (plain text)
-
-**Fix:**
-```markdown
-## Phase 1 – Requirements  ✅
-## Phase 2 – Architecture  ✅
-```
-
-### "Output file not created"
-
-**Check:**
-- Write permission in output directory
-- No file path typos
-- Enough disk space
-
-**Test:**
-```bash
-touch /path/to/directory/test.txt
-```
-
-### "Prompts are too short"
-
-**Reason:** Plan has minimal detail
-**Fix:** Add more to your **Objective**, **Scope**, and **Outcome** sections
-
-### "Prompts don't match my intent"
-
-**Solution:**
-1. Edit your source plan to clarify intent
-2. Re-run the skill
-3. Generated prompts will improve
-
-## Technical Details
-
-### Input Requirements
-- **Format:** Markdown (`.md`)
-- **Structure:** Clear `## Phase X – Title` headings
-- **Content:** Objective, Scope, Outcome sections for each phase
-- **Size:** Works with 1–20+ phases
-
-### Output Guarantee
-- **Format:** Single consolidated Markdown file
-- **Location:** Same directory as input plan
-- **Naming:** `speckit-prompts.md` (or custom path)
-- **Quality:** All prompts validated against quality standards
-
-### Execution
-- **Method:** Python 3.7+
-- **Time:** < 1 second for typical 5-phase plan
-- **Error Handling:** Clear messages for common issues
-
-## Advanced Topics
-
-### Running the Script Directly
-
-Instead of using the skill, you can run the Python script directly:
-
-```bash
-python scripts/generate_prompts.py /path/to/plan.md [output_path]
-```
-
-**Use cases:**
-- Integrate with your CI/CD pipeline
-- Batch process multiple plans
-- Custom output handling
-
-### Customizing Prompts
-
-After generation, prompts can be edited:
-
-1. Generated output in `speckit-prompts.md`
-2. Edit prompt text as needed
-3. Copy individual prompts to `/sp.specify` or `/sp.plan`
-
-### Regenerating After Plan Changes
-
-Your plan will evolve as you develop. To regenerate:
-
-1. Update your source plan
-2. Re-run: `Generate Speckit prompts from: /path/to/updated-plan.md`
-3. Review updated `speckit-prompts.md`
-
-## Files in This Skill
-
-| File | Purpose |
-|------|---------|
-| **SKILL.md** | User guide, quick start, usage examples |
-| **scripts/generate_prompts.py** | Executable prompt generation script |
-| **references/prompt-quality-standards.md** | Design patterns, anti-patterns, quality checklist |
-| **references/workflows.md** | Real-world examples, tips, troubleshooting |
-| **assets/example-output.md** | Sample generated output for reference |
-| **IMPLEMENTATION_SUMMARY.md** | Technical overview and architecture |
-| **PACKAGING_GUIDE.md** | Distribution and version management |
-| **README.md** | This file – overview and quick reference |
-
-## Support & Resources
-
-### Start Here
-- `SKILL.md` – Quick start and basic usage
-- `example-output.md` – See what output looks like
-
-### For Detailed Guidance
-- `prompt-quality-standards.md` – Understand quality principles
-- `workflows.md` – Real-world usage examples
-- `IMPLEMENTATION_SUMMARY.md` – Technical details
-
-### For Distribution
-- `PACKAGING_GUIDE.md` – How to package and share the skill
-- Version management and changelog guidance
-
-## Contributing & Feedback
-
-This skill was created to support Spec-Driven Development workflows. Feedback helps improve it:
-
-- **What works well?** Share examples and use cases
-- **What's missing?** Suggest new features or patterns
-- **Found a bug?** Describe the issue and expected behavior
-- **Ideas for improvement?** Tell us your thoughts
-
-## Version Information
-
-- **Version:** 1.0.0
-- **Created:** 2025-12-31
-- **Compatible with:** Claude Code, Speckit (Spec-Driven Development)
-- **Python requirement:** 3.7+
-
-## License
-
-This skill is provided as-is for use with Claude Code and Speckit workflows.
-
----
-
-## Quick Links
-
-- 📖 **User Guide:** See `SKILL.md`
-- 🎯 **Examples:** See `example-output.md`
-- 📚 **Patterns:** See `references/prompt-quality-standards.md`
-- 🛠️ **Workflows:** See `references/workflows.md`
-- 📦 **Distribution:** See `PACKAGING_GUIDE.md`
-
----
-
-**Ready to generate your first set of Speckit prompts?**
-
-Create your plan document with clear phases, then ask:
-```
-Generate Speckit prompts from: /path/to/plan.md
-```
-
-The skill will handle the rest. Happy prompting! 🚀
+</div>
